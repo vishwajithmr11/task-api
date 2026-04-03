@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-let tasks = [{ id: 1, title: 'Sample task', done: false }];
-let nextId = 2;
+let tasks = [
+  { id: 1, title: "Sample task", done: false }
+];
 
 router.get('/tasks', (req, res) => {
   res.json(tasks);
@@ -11,9 +12,13 @@ router.get('/tasks', (req, res) => {
 router.post('/tasks', (req, res) => {
   const { title } = req.body;
   if (!title) {
-    return res.status(400).json({ error: 'Title is required' });
+    return res.status(400).json({ message: "Title is required" });
   }
-  const newTask = { id: nextId++, title, done: false };
+  const newTask = {
+    id: tasks.length + 1,
+    title,
+    done: false,
+  };
   tasks.push(newTask);
   res.status(201).json(newTask);
 });
